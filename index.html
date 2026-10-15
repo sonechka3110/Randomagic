@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Рандомайзер — фильмы, сериалы, игры</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <div class="hero-badge" id="hero-stats">🎲 <span id="hero-count">—</span> тайтлов
+        <span class="hero-repeats">0 повторов</span>
+        <button class="link-btn hero-reset" id="hero-reset" title="Начать новый круг" aria-label="Начать новый круг">🔄</button>
+      </div>
+      <h1>Что посмотреть,<br />во что поиграть?</h1>
+      <p class="subtitle">
+        Нажми кнопку — случайный подбор из фильмов, сериалов и игр.
+        Ни один тайтл не выпадет дважды за круг.
+      </p>
+    </header>
+
+    <footer>Случай без повторов · новый круг — по кнопке «Начать заново»</footer>
+      <p class="subtitle">
+        Нажми кнопку — случайный подбор из фильмов, сериалов и игр.
+        Ни один тайтл не выпадет дважды за круг.
+      </p>
+    </header>
+
+    <div class="filters">
+      <label class="filter">
+        <span>Жанр</span>
+        <select id="genre-filter"></select>
+      </label>
+      <label class="filter">
+        <span>Рейтинг от</span>
+        <select id="rating-filter">
+          <option value="">Любой</option>
+          <option value="7">7+</option>
+          <option value="8">8+</option>
+          <option value="8.5">8.5+</option>
+          <option value="9">9+</option>
+        </select>
+      </label>
+      <label class="filter">
+        <span>Возраст до</span>
+        <select id="age-filter">
+          <option value="">Любой</option>
+          <option value="6">6+</option>
+          <option value="12">12+</option>
+          <option value="16">16+</option>
+        </select>
+      </label>
+      <button class="link-btn" id="reset-filters">Сбросить</button>
+    </div>
+
+    <div class="categories">
+      <button class="btn" data-category="movies">
+        <span class="btn-icon">🎬</span> Фильм
+      </button>
+      <button class="btn" data-category="series">
+        <span class="btn-icon">📺</span> Сериал
+      </button>
+      <button class="btn" data-category="games">
+        <span class="btn-icon">🎮</span> Игра
+      </button>
+      <button class="btn primary" id="reroll">
+        <span class="btn-icon">✨</span> <span id="reroll-label">Что угодно</span>
+      </button>
+    </div>
+
+    <section class="card" id="card" aria-live="polite" tabindex="0" role="button" aria-label="Подробнее о подборе">
+      <div class="card-glow" aria-hidden="true"></div>
+      <div class="card-hint" aria-hidden="true">Подробнее →</div>
+      <div class="card-category" id="category-label"></div>
+      <h2 class="card-title" id="title"></h2>
+      <div class="card-meta" id="meta"></div>
+      <p class="card-note" id="note"></p>
+      <div class="card-remaining" id="remaining"></div>
+    </section>
+
+    <div class="status" id="status"></div>
+
+    <section class="history">
+      <div class="history-header">
+        <h2>Последние подборки</h2>
+        <button class="link-btn" id="clear-recent">Очистить</button>
+      </div>
+      <ul id="recent"></ul>
+    </section>
+
+    <footer class="footer">Случай без повторов · новый круг — по кнопке «Начать заново»</footer>
+  </div>
+
+  <!-- Модалка «Подробнее»: локальное краткое содержание -->
+  <div class="modal-backdrop" id="modal-backdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" aria-label="Закрыть">✕</button>
+      <div class="modal-body">
+        <img class="modal-poster hidden" id="modal-poster" alt="Постер" />
+        <div class="modal-text">
+          <div class="card-category" id="modal-category"></div>
+          <h2 class="modal-title" id="modal-title"></h2>
+          <div class="card-meta" id="modal-meta"></div>
+          <p class="modal-desc" id="modal-desc"></p>
+        </div>
+      </div>
+      <div class="modal-spinner hidden" id="modal-spinner">
+        <span class="spinner"></span> Загружаю постер…
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="main.js?v=15"></script>
+</body>
+</html>
